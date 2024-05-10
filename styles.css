@@ -1,0 +1,14 @@
+body {
+    font-family: Arial, sans-serif;
+}
+
+#addEventForm {
+    display: flex;
+    flex-direction: column;
+    width: 30%;
+    
+}
+
+label {
+    margin-bottom: 5px;
+}

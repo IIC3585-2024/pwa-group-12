@@ -1,0 +1,57 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Event Details</title>
+<link rel="stylesheet" type="text/css" href="styles.css">
+</head>
+<body>
+    <h1>Event Details</h1>
+    <div id="eventDetails"></div>
+
+    <script>
+        // Función para obtener parámetro de la URL
+        function getParameterByName(name, url) {
+            if (!url) url = window.location.href;
+            name = name.replace(/[\[\]]/g, '\\$&');
+            const regex = new RegExp('[?&]' + name + '(=([^&#]*)|&|#|$)');
+            const results = regex.exec(url);
+            if (!results) return null;
+            if (!results[2]) return '';
+            return decodeURIComponent(results[2].replace(/\+/g, ' '));
+        }
+
+        // Obtener el ID del evento de la URL
+        const eventId = getParameterByName('eventId');
+
+        // Obtener el evento correspondiente
+        const event = events[eventId];
+
+        // Mostrar detalles del evento en el HTML
+        const eventDetailsDiv = document.getElementById('eventDetails');
+        const eventDetailsHTML = `
+            <h2>${event.name}</h2>
+            <h3>People (${event.people.length}):</h3>
+            <ul>
+                ${event.people.map(person => `<li>${person.name}</li>`).join('')}
+            </ul>
+            <h3>Total Expenses:</h3>
+            <p>${getTotalExpense(event.expenses)}</p>
+            <h3>Average Expense per Person:</h3>
+            <p>${getAverageExpense(event.expenses)}</p>
+        `;
+        eventDetailsDiv.innerHTML = eventDetailsHTML;
+
+        // Función para calcular el gasto total
+        function getTotalExpense(expenses) {
+            return expenses.reduce((total, expense) => total + expense.amount, 0);
+        }
+
+        // Función para calcular el gasto promedio por persona
+        function getAverageExpense(expenses) {
+            return getTotalExpense(expenses) / event.people.length;
+        }
+    </script>
+</body>
+</html>

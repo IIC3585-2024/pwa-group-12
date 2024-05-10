@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Split Expenses</title>
+<link rel="stylesheet" type="text/css" href="styles.css">
+</head>
+<body>
+    <h1>Crea tu eveto y divide los gastos</h1>
+    <div id="Eventform"></div>
+        <form id="addEventForm">
+            <label for="eventName">Event Name:</label>
+            <input type="text" id="eventName" name="eventName" required>
+            <label for="numPeople">Number of People:</label>
+            <input type="number" id="numPeople" name="numPeople" required>
+            <script>
+                // Add input fields for each person
+                const numPeopleInput = document.getElementById('numPeople');
+                numPeopleInput.addEventListener('input', () => {
+                    const numPeople = numPeopleInput.value;
+                    const form = document.getElementById('addEventForm');
+                    const inputs = form.querySelectorAll('.person');
+                    inputs.forEach(input => input.remove());
+                    for (let i = 0; i < numPeople; i++) {
+                        const input = document.createElement('input');
+                        input.type = 'text';
+                        input.name = `person${i}`;
+                        input.className = 'person';
+                        input.placeholder = `Person ${i + 1}`;
+                        form.appendChild(input);
+                    }
+                });
+            </script>
+        </form>
+    <button id="addEventBtn">Add Event</button>
+    </div>
+
+    <h1>Event List</h1>
+    <div id="EventList">
+        <ul id="eventList"></ul>
+    </div>
+
+    <script src="index.js" type="module"></script>
+</body>
+</html>
