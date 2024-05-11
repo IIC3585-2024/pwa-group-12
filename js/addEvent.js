@@ -1,5 +1,5 @@
 import { Person, Event } from './classes.js';
-import { saveEvent, getEvents } from './IndeedDb.js';
+import { saveEvent, getEvents } from './IndeedDB.js';
 
 function addEvent(events) {
     const eventName = document.getElementById('eventName').value;
@@ -19,11 +19,12 @@ function addEvent(events) {
     console.log("participantes: ", event.people);
     console.log("Eventos: ", events);
     saveEvent(event);
+    updateEventList();
   }
 
-function updateEventList() {
+async function updateEventList() {
   const eventList = document.getElementById('eventList');
-  events = getEvents();
+  let events = await getEvents();
   console.log("Eventos: ", events);
   eventList.innerHTML = '';
   events.forEach((event, index) => {
