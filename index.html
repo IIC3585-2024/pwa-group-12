@@ -3,8 +3,10 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta name="theme-color" content="white">
 <title>Split Expenses</title>
-<link rel="stylesheet" type="text/css" href="styles.css">
+<link rel="stylesheet" type="text/css" href="css/styles.css">
+<link rel="manifest" href="pwa/manifest.json">
 </head>
 <body>
     <h1>Crea tu eveto y divide los gastos</h1>
@@ -41,6 +43,7 @@
         <ul id="eventList"></ul>
     </div>
 
-    <script src="index.js" type="module"></script>
+    <script src="js/workers.js"></script>
+    <script src="js/index.js" type="module"></script>
 </body>
 </html>
