@@ -3,7 +3,6 @@ window.addEventListener('load', () => {
   registerSW();
 });
 
-// Register the Service Worker
 async function registerSW() {
   if ('serviceWorker' in navigator) {
     try {

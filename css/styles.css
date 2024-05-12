@@ -1,14 +1,81 @@
 body {
-    font-family: Arial, sans-serif;
+  font-family: Arial, sans-serif;
 }
 
 #addEventForm {
-    display: flex;
-    flex-direction: column;
-    width: 30%;
-    
+  display: flex;
+  flex-direction: column;
+  width: 30%;
 }
 
 label {
-    margin-bottom: 5px;
+  margin-bottom: 5px;
+}
+
+.navbar {
+  overflow: hidden;
+  background-color: #ffffff;
+  width: 100%;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  box-shadow: rgba(0, 0, 0, 0.1) 0px 0px 5px 0px, rgba(0, 0, 0, 0.1) 0px 0px 1px 0px;
+  border-radius: 2%;
+}
+
+.ucount-logo img {
+  max-width: 70px; /* Ajusta el tamaño del logo según lo necesites */
+  padding: 10px;
+}
+
+.navbar-links {
+  display: flex;
+  transition: max-height 0.3s ease-out;
+  overflow: hidden;
+  padding-right: 2%;
+  max-height: 50px; /* Altura máxima cuando está oculto */
+}
+
+.navbar-links.active {
+  max-height: 200px; /* Altura máxima cuando está desplegado */
+}
+
+
+.navbar-links a {
+  color: white;
+  text-decoration: none;
+  padding: 14px 16px;
+  color: gray;
+}
+
+.navbar-links a:hover {
+  color: black;
+}
+
+.menu-toggle {
+  display: none; /* Ocultar el botón de menú inicialmente */
+  color: white;
+  font-size: 20px;
+  padding: 10px;
+  cursor: pointer;
+}
+
+@media screen and (max-width: 600px) {
+  .navbar-links {
+    display: none; /* Ocultar los enlaces de navegación en pantallas pequeñas */
+    flex-direction: column;
+    position: absolute;
+    top: 50px; /* Ajusta la posición vertical según sea necesario */
+    left: 0;
+    background-color: #333;
+    width: 100%;
+  }
+
+  .navbar-links a {
+    padding: 10px;
+  }
+
+  .menu-toggle {
+    display: block; /* Mostrar el botón de menú en pantallas pequeñas */
+  }
 }
