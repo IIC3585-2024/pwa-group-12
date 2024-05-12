@@ -94,6 +94,7 @@ label {
 
 .info:active {
   background-color: #2196f3;
+}
 
 .navbar {
   overflow: hidden;
@@ -122,7 +123,6 @@ label {
 .navbar-links.active {
   max-height: 200px; /* Altura máxima cuando está desplegado */
 }
-
 
 .navbar-links a {
   color: white;

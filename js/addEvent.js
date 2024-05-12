@@ -32,7 +32,7 @@ async function updateEventList() {
     const eventElement = document.createElement("li");
     const eventLink = document.createElement("a");
     eventLink.textContent = `${event.name} - ${event.people.length} personas`;
-    eventLink.href = `templates/event.html?eventId=${index + 1}`; // Enlace a la vista específica del evento
+    eventLink.href = `views/event.html?eventId=${index + 1}`; // Enlace a la vista específica del evento
     eventElement.appendChild(eventLink);
     eventList.appendChild(eventElement);
   });
