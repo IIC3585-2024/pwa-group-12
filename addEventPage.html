@@ -1,0 +1,120 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta name="theme-color" content="white" />
+    <title>Split Expenses</title>
+    <link rel="stylesheet" type="text/css" href="css/styles.css" />
+    <link rel="manifest" href="pwa/manifest.json" />
+    <link rel="icon" href="pwa/icons/icon-96x96.png" type="image/png" />
+  </head>
+  <body>
+    <!-- <div class="column">
+        <div class="row">
+            <div class="row-item"> -->
+      <h1>New Event</h1>
+            <!-- </div> -->
+      <div id="eventform">
+      <form id="addEventForm">
+        <label for="eventName">Event Name:</label>
+        <input type="text" id="eventName" name="eventName" required />
+        <label for="eventCurrency">Currency:</label>
+        <select id="eventCurrency" name="eventCurrency">
+          <option value="USD">USD</option>
+          <option value="EUR">EUR</option>
+          <option value="JPY">JPY</option>
+          <option value="CLP">CLP</option>
+        </select>
+        <label for="eventParticipants">Participants</label>
+        <div class="row" id="participant1">
+          <input type="text" id="participantInput1" name="participant1" />
+            <button type="button" class="button danger" onclick="deleteParticipant('participant1')">
+                Delete
+        </div>
+        <button type="button" id="addParticipantBtn" class="button info">Add Participant</button>
+        <script>
+          // Counter for tracking participant number
+          let participantCount = 1;
+
+          function deleteParticipant(participantId) {
+            participantCount--;
+            const participant = document.getElementById(participantId);
+            participant.remove();
+          }
+
+          // Function to add a new input field
+          function addInput() {
+            participantCount++;
+
+            // Create new input element
+
+            const container = document.createElement("div");
+            container.className = "row";
+            container.id = "participant" + participantCount;
+
+            const newInput = document.createElement("input");
+            newInput.type = "text";
+            newInput.id = "participantInput" + participantCount;
+            newInput.name = "participant" + participantCount;
+
+            const newDeleteButton = document.createElement("button");
+            newDeleteButton.textContent = "Delete";
+            newDeleteButton.className = "button danger"
+            newDeleteButton.addEventListener(
+              "click",
+              () => deleteParticipant(container.id),
+              false
+            );
+
+            container.appendChild(newInput);
+            container.appendChild(newDeleteButton);
+
+            // Append container to the form
+            document
+              .getElementById("addEventForm")
+              .insertBefore(
+                container,
+                document.getElementById("addParticipantBtn")
+              );
+          }
+
+          // Add event listener to the button
+          document
+            .getElementById("addParticipantBtn")
+            .addEventListener("click", addInput);
+        </script>
+
+        <!-- <script>
+          // Add input fields for each person
+          const numPeopleInput = document.getElementById("numPeople");
+          numPeopleInput.addEventListener("input", () => {
+            const numPeople = numPeopleInput.value;
+            const form = document.getElementById("addEventForm");
+            const inputs = form.querySelectorAll(".person");
+            inputs.forEach((input) => input.remove());
+            for (let i = 0; i < numPeople; i++) {
+              const input = document.createElement("input");
+              input.type = "text";
+              input.name = `person${i}`;
+              input.className = "person";
+              input.placeholder = `Person ${i + 1}`;
+              form.appendChild(input);
+            }
+          });
+        </script> -->
+      </form>
+        <!-- </div>
+    </div> -->
+      <button id="addEventBtn" class="button success">Add Event</button>
+    </div>
+
+    <h1>Event List</h1>
+    <div id="EventList">
+      <ul id="eventList"></ul>
+    </div>
+
+    <script src="js/workers.js"></script>
+    <script src="js/index.js" type="module"></script>
+  </body>
+</html>
