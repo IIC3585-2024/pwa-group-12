@@ -1,4 +1,5 @@
 window.addEventListener('load', () => {
+  console.log('SW registration in progress');
   registerSW();
 });
 
@@ -7,10 +8,13 @@ async function registerSW() {
     try {
       await navigator
             .serviceWorker
-            .register('serviceworker.js');
+            .register('../pwa/service-worker.js');
+      console.log('SW registration successful');
     }
     catch (e) {
       console.log('SW registration failed');
     }
   }
 }
+
+export { registerSW };

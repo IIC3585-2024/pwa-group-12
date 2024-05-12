@@ -36,10 +36,11 @@
                     const form = document.getElementById('addEventForm');
                     const inputs = form.querySelectorAll('.person');
                     inputs.forEach(input => input.remove());
-                    for (let i = 0; i < numPeople; i++) {
+                     for (let i = 0; i < numPeople; i++) {
                         const input = document.createElement('input');
                         input.type = 'text';
                         input.name = `person${i}`;
+                        input.id = `person${i}`;
                         input.className = 'person';
                         input.placeholder = `Person ${i + 1}`;
                         form.appendChild(input);
@@ -55,7 +56,6 @@
         <ul id="eventList"></ul>
     </div>
 
-    <script src="js/workers.js"></script>
     <script src="js/index.js" type="module"></script>
     <script>
         document.addEventListener('DOMContentLoaded', function() {
