@@ -3,12 +3,14 @@ import { saveEvent, getEvents, getEvent } from "./IndeedDB.js";
 
 function addEvent(events) {
   const eventName = document.getElementById("eventName").value;
-  const numPeople = parseInt(document.getElementById("numPeople").value);
   const people = [];
 
-  // Obtener nombres de personas del formulario
-  for (let i = 0; i < numPeople; i++) {
-    const personName = document.getElementById(`person${i}`).value;
+  const partcipantParentElement = document.getElementById(
+    "participantsElements"
+  );
+
+  for (let i = 0; i < partcipantParentElement.children.length - 1; i++) {
+    const personName = partcipantParentElement.children[i].children[0].value;
     console.log("Persona: ", personName);
     const person = new Person(personName);
     people.push(person);
@@ -32,7 +34,7 @@ async function updateEventList() {
     const eventElement = document.createElement("li");
     const eventLink = document.createElement("a");
     eventLink.textContent = `${event.name} - ${event.people.length} personas`;
-    eventLink.href = `views/event.html?eventId=${index + 1}`; // Enlace a la vista específica del evento
+    eventLink.href = `event.html?eventId=${index + 1}`; // Enlace a la vista específica del evento
     eventElement.appendChild(eventLink);
     eventList.appendChild(eventElement);
   });

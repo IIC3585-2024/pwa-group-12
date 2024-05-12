@@ -34,12 +34,14 @@
           <option value="CLP">CLP</option>
         </select>
         <label for="eventParticipants">Participants</label>
+        <div id="participantsElements">
         <div class="row" id="participant1">
           <input type="text" id="participantInput1" name="participant1" />
             <button type="button" class="button danger" onclick="deleteParticipant('participant1')">
                 Delete
         </div>
         <button type="button" id="addParticipantBtn" class="button info">Add Participant</button>
+        </div>
         <script>
           // Counter for tracking participant number
           let participantCount = 1;
@@ -79,7 +81,7 @@
 
             // Append container to the form
             document
-              .getElementById("addEventForm")
+              .getElementById("participantsElements")
               .insertBefore(
                 container,
                 document.getElementById("addParticipantBtn")
