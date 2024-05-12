@@ -1,14 +1,97 @@
 body {
-    font-family: Arial, sans-serif;
+  font-family: Arial, sans-serif;
+  justify-content: center;
 }
 
 #addEventForm {
-    display: flex;
-    flex-direction: column;
-    width: 30%;
-    
+  display: flex;
+  flex-direction: column;
+  width: 30%;
 }
 
 label {
-    margin-bottom: 5px;
+  margin-bottom: 5px;
+}
+
+/* Style for the column div */
+.column {
+  display: flex;
+  flex-direction: column;
+  padding: 10px;
+}
+
+/* Style for the row div */
+.row {
+  display: flex; /* Add display flex to make items in row */
+  padding: 10px;
+  margin-bottom: 5px;
+  justify-content: center;
+}
+
+/* Style for the items in each row */
+.row-item {
+  flex-grow: 1; /* Expand to fill available space equally */
+  flex-basis: 0; /* Reset the initial width */
+  max-width: 33%; /* Limit maximum width of each item */
+  text-align: center; /* Center text */
+  margin: 0 5px; /* Add some margin for spacing */
+}
+
+.button {
+  background-color: #019906; /* Green */
+  border: none;
+  border-radius: 12px;
+  box-shadow: 0 9px #999;
+  color: white;
+  padding: 15px 32px;
+  text-align: center;
+  text-decoration: none;
+  display: inline-block;
+  font-size: 16px;
+}
+
+.button:hover {
+  background-color: #3e8e41;
+}
+
+.button:active {
+  background-color: #3e8e41;
+  box-shadow: 0 5px #666;
+  transform: translateY(4px);
+}
+
+.success {
+  background-color: #019906;
+}
+
+.success:hover {
+  background-color: #3e8e41;
+}
+
+.success:active {
+  background-color: #3e8e41;
+}
+
+.danger {
+  background-color: #f44336;
+}
+
+.danger:hover {
+  background-color: #f44336;
+}
+
+.danger:active {
+  background-color: #f44336;
+}
+
+.info {
+  background-color: #2196f3;
+}
+
+.info:hover {
+  background-color: #2196f3;
+}
+
+.info:active {
+  background-color: #2196f3;
 }
