@@ -16,15 +16,57 @@
       width="100%"
       height="500px"
     ></iframe>
-
-    <!-- <iframe
-      src="addEventPage.html"
-      frameborder="0"
-      width="100%"
-      height="500px"
-    ></iframe> -->
-
-    <script src="js/workers.js"></script>
+    <div class="navbar">
+        <div class="ucount-logo">
+            <img src="images/maskable.png" alt="Descripción de la imagen">
+        </div>
+        <button class="menu-toggle">&#9776;</button> <!-- Botón de menú de hamburguesa -->
+        <div class="navbar-links">
+            <a href="#">Home</a>
+            <a href="views/events.html">Events</a>
+            <a href="views/createEvent.html">Create Event</a>
+        </div>
+    </div>    
+    
+    <h1>Crea tu evento y divide los gastos</h1>
+    <div id="Eventform">
+        <form id="addEventForm">
+            <label for="eventName">Event Name:</label>
+            <input type="text" id="eventName" name="eventName" required>
+            <label for="numPeople">Number of People:</label>
+            <input type="number" id="numPeople" name="numPeople" required>
+            <script>
+                // Add input fields for each person
+                const numPeopleInput = document.getElementById('numPeople');
+                numPeopleInput.addEventListener('input', () => {
+                    const numPeople = numPeopleInput.value;
+                    const form = document.getElementById('addEventForm');
+                    const inputs = form.querySelectorAll('.person');
+                    inputs.forEach(input => input.remove());
+                     for (let i = 0; i < numPeople; i++) {
+                        const input = document.createElement('input');
+                        input.type = 'text';
+                        input.name = `person${i}`;
+                        input.id = `person${i}`;
+                        input.className = 'person';
+                        input.placeholder = `Person ${i + 1}`;
+                        form.appendChild(input);
+                    }
+                });
+            </script>
+        </form>
+        <button id="addEventBtn">Add Event</button>
+    </div>
     <script src="js/index.js" type="module"></script>
-  </body>
+    <script>
+        document.addEventListener('DOMContentLoaded', function() {
+            const menuToggle = document.querySelector('.menu-toggle');
+            const navbarLinks = document.querySelector('.navbar-links');
+
+            menuToggle.addEventListener('click', function() {
+                navbarLinks.classList.toggle('active');
+            });
+        });
+    </script>
+</body>
 </html>
