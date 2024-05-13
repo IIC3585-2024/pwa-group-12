@@ -42,6 +42,14 @@ function saveEvent(event) {
   console.log("Evento guardado");
 }
 
+function updateEvent(event) {
+  let db = request.result;
+  let transaction = db.transaction(["events"], "readwrite");
+  let store = transaction.objectStore("events");
+  store.put(event);
+  console.log("Evento actualizado");
+}
+
 async function getEvent(eventId) {
   return new Promise((resolve, reject) => {
     let requestHere = indexedDB.open("events", 1);
@@ -109,5 +117,4 @@ async function getEvents() {
     };
   });
 }
-
-export { saveEvent, getEvents, getEvent, startDB };
+export { saveEvent, getEvents, getEvent, startDB, updateEvent };

@@ -1,4 +1,4 @@
-import { addEvent, updateEventList } from "./addEvent.js";
+import { addEvent, updateEventList, addExpense } from "./addEvent.js";
 import { startDB } from "./IndeedDB.js";
 import { registerSW } from "./workers.js";
 // definimos events en indeedDB API
