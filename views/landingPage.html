@@ -42,6 +42,7 @@
         </div>
       </div>
     </div>
+    <button id="notification-btn">Enviar notificación de prueba</button>
     <script type="module">
       document.addEventListener("DOMContentLoaded", function () {
         document.getElementById("addEventBtn").addEventListener("click", () => {
@@ -50,7 +51,7 @@
       });
     </script>
     <script>
-        const button = document.getElementById('somebutton');
+        const button = document.getElementById('notification-btn');
 
         button.addEventListener('click', () => {
             Notification.requestPermission().then((result) => {
