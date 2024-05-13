@@ -15,7 +15,7 @@
         <img src="images/maskable.png" alt="Descripción de la imagen" />
       </div>
       <div class="navbar-links">
-        <a href="views/landingPage.html">Home</a>
+        <a href="/">Home</a>
         <a href="views/events.html">Events</a>
         <a href="views/addEventPage.html">Create Event</a>
       </div>
@@ -48,18 +48,6 @@
           window.location.href = "addEventPage.html";
         });
       });
-    </script>
-    <button id="somebutton">Enviar notificación de prueba</button>
-    <script>
-        const button = document.getElementById('somebutton');
-
-        button.addEventListener('click', () => {
-            Notification.requestPermission().then((result) => {
-                if (result === 'granted') {
-                    new Notification('Podemos recibir notificaciones!');
-                }
-            });
-        });
     </script>
   </body>
 </html>
