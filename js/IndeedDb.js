@@ -172,13 +172,13 @@ async function getSubscriptions() {
       var getRequest = store.getAll();
 
       getRequest.onsuccess = function (event) {
-        var subscriptions = getRequest.result; // Assign the result to the variable
+        var subscriptions = getRequest.result; 
         console.log("Subscriptions obtained: ", subscriptions);
-        resolve(subscriptions); // Resolve the promise with the retrieved subscriptions data
+        resolve(subscriptions); 
       };
       getRequest.onerror = function (event) {
         console.log("Error obtaining the subscriptions: ", getRequest.error);
-        reject(getRequest.error); // Reject the promise with the error
+        reject(getRequest.error);
       };
 
       transaction.oncomplete = function (event) {
@@ -188,7 +188,7 @@ async function getSubscriptions() {
 
     requestHere.onerror = function (event) {
       console.log("Error opening the database: ", requestHere.error);
-      reject(requestHere.error); // Reject the promise if there's an error opening the database
+      reject(requestHere.error);
     };
   });
 }
