@@ -1,5 +1,5 @@
 import { Person, Event } from "./classes.js";
-import { saveEvent, getEvents, getEvent, updateEvent } from "./IndeedDB.js";
+import { saveEvent, getEvents, getEvent, updateEvent } from "./IndeedDb.js";
 
 function addEvent(events) {
   const eventName = document.getElementById("eventName").value;
