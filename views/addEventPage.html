@@ -124,6 +124,14 @@
         <!-- </div>
     </div> -->
       <button id="addEventBtn" class="button success">Add Event</button>
+      <script src="../js/addEvent.js" type="module"></script>
+      <script type = "module">
+        import { addEvent } from "../js/addEvent.js";
+              document.addEventListener("DOMContentLoaded", function () {
+                const addExpenseBtn = document.getElementById("addEventBtn");
+                addExpenseBtn.addEventListener("click", addEvent);
+              });
+      </script>
       </div>
     </div>
     </div>
