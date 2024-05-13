@@ -11,3 +11,6 @@ await updateEventList();
 
 // Agregar evento al hacer clic en el botón
 document.getElementById("addEventBtn").addEventListener("click", addEvent);
+
+// Esto solicita permiso para enviar notificaciones push
+

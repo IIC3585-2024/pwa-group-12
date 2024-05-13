@@ -1,6 +1,4 @@
 // Importa el script de notificaciones push
-importScripts('/js/push-notifications.js');
-
 const CACHE_NAME = 'grupo12app-cache-v1';
 const urlsToCache = [
   '/',
@@ -9,9 +7,8 @@ const urlsToCache = [
   '/js/addEvent.js',
   '/js/classes.js',
   '/js/index.js',
-  '/js/update.js',
-  '/js/push-notifications.js', // Asegúrate de cachear también este archivo
-  '/templates/event.html',
+  '/views/addEventPage.html',
+  '/views/events.html'
   // Agrega aquí cualquier otro recurso estático que desees cachear
 ];
 
@@ -50,15 +47,16 @@ self.addEventListener('activate', event => {
   );
 });
 
-// // Manejo de notificaciones push
-// self.addEventListener('push', function(event) {
-//   const options = {
-//     body: 'Push notification de ejemplo!',
-//     icon: 'icons/icon-512x512.png',
-//     badge: 'images/icon-96x96.png'
-//   };
+self.addEventListener('push', function(event) {
+  const payload = event.data ? event.data.text() : '¡Nueva notificación!';
 
-//   event.waitUntil(
-//     self.registration.showNotification('Push Notification', options)
-//   );
-// });
+  const options = {
+    body: payload,
+    icon: 'images/icon.png',
+    badge: 'images/badge.png'
+  };
+
+  event.waitUntil(
+    self.registration.showNotification('Tu título', options)
+  );
+});
