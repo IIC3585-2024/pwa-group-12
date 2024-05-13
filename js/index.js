@@ -8,6 +8,3 @@ startDB();
 await updateEventList();
 
 document.getElementById("addEventBtn").addEventListener("click", addEvent);
-
-// Esto solicita permiso para enviar notificaciones push
-
