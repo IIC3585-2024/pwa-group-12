@@ -46,10 +46,14 @@ function addExpense() {
   const expenseName = document.getElementById("expenseName").value;
   const expenseAmount = document.getElementById("expenseAmount").value;
   const expensePayer = document.getElementById("expensePayer").value;
+  const expenseParticipants = document.getElementById("expenseParticipants")
+  // tomamos las checkbox que estan seleccionadas
+  const selectedParticipants = [...expenseParticipants.querySelectorAll('input[type="checkbox"]:checked')];
   const expense = {
     payer: expensePayer,
     name: expenseName,
     amount: expenseAmount,
+    participants: selectedParticipants.map((participant) => participant.value),
   };
   console.log("Gasto: ", expense);
   console.log("Evento: ", eventId);
