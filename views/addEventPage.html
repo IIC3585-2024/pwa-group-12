@@ -48,7 +48,6 @@
         </div>
     
         <script>
-          // Counter for tracking participant number
           let participantCount = 1;
 
           function deleteParticipant(participantId) {
@@ -57,12 +56,8 @@
             participant.remove();
           }
 
-          // Function to add a new input field
           function addInput() {
             participantCount++;
-
-            // Create new input element
-
             const container = document.createElement("div");
             container.className = "row";
             container.id = "participant" + participantCount;
@@ -83,8 +78,7 @@
 
             container.appendChild(newInput);
             container.appendChild(newDeleteButton);
-
-            // Append container to the form
+            
             document
               .getElementById("participantsElements")
               .insertBefore(
@@ -92,37 +86,11 @@
                 document.getElementById("addParticipantBtn")
               );
           }
-
-          // Add event listener to the button
           document
             .getElementById("addParticipantBtn")
             .addEventListener("click", addInput);
-
-
-          
         </script>
-
-        <!-- <script>
-          // Add input fields for each person
-          const numPeopleInput = document.getElementById("numPeople");
-          numPeopleInput.addEventListener("input", () => {
-            const numPeople = numPeopleInput.value;
-            const form = document.getElementById("addEventForm");
-            const inputs = form.querySelectorAll(".person");
-            inputs.forEach((input) => input.remove());
-            for (let i = 0; i < numPeople; i++) {
-              const input = document.createElement("input");
-              input.type = "text";
-              input.name = `person${i}`;
-              input.className = "person";
-              input.placeholder = `Person ${i + 1}`;
-              form.appendChild(input);
-            }
-          });
-        </script> -->
       </form>
-        <!-- </div>
-    </div> -->
       <button id="addEventBtn" class="button success">Add Event</button>
       <script src="../js/addEvent.js" type="module"></script>
       <script type = "module">
@@ -143,5 +111,18 @@
 
     <script src="../js/index.js" type="module"></script>
     <script src="../js/IndeedDb.js" type="module"></script>
+    <script>
+        const button = document.getElementById('addParticipantBtn');
+        button.addEventListener('click', () => {
+            Notification.requestPermission().then((result) => {
+                if (result === 'granted') {
+                    new Notification('Se ha agregado participante', {
+                        body: 'Ha aumentado el número de participantes en el evento',
+                        icon: '../pwa/icons/icon-512x512.png'
+                    });
+                }
+            });
+        });
+    </script>
   </body>
 </html>
