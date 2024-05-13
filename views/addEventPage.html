@@ -98,7 +98,17 @@
               document.addEventListener("DOMContentLoaded", function () {
                 const addExpenseBtn = document.getElementById("addEventBtn");
                 addExpenseBtn.addEventListener("click", addEvent);
+                addExpenseBtn.addEventListener('click', () => {
+                  Notification.requestPermission().then((result) => {
+                      if (result === 'granted') {
+                          new Notification('Se ha agregado un evento', {
+                              body: 'Agregaste un evento nuevo a la lista de eventos',
+                              icon: '../pwa/icons/icon-512x512.png'
+                          });
+                      }
+                  });
               });
+            });
       </script>
       </div>
     </div>
