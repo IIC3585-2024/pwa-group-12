@@ -24,6 +24,7 @@ function addEvent(events) {
 }
 
 async function updateEventList() {
+  console.log("Updating event list");
   const eventList = document.getElementById("eventList");
   let events = await getEvents();
   eventList.innerHTML = "";
