@@ -119,7 +119,8 @@ label {
 }
 
 .navbar-links {
-  display: flex;
+  display: flex; /* Mostrar los enlaces de navegación */
+  flex-direction: row; /* Orientación horizontal */
   transition: max-height 0.3s ease-out;
   overflow: hidden;
   padding-right: 2%;
@@ -151,21 +152,27 @@ label {
 
 @media screen and (max-width: 600px) {
   .navbar-links {
-    display: none; /* Ocultar los enlaces de navegación en pantallas pequeñas */
-    flex-direction: column;
-    position: absolute;
-    top: 50px; /* Ajusta la posición vertical según sea necesario */
-    left: 0;
-    background-color: #333;
+    flex-direction: column; /* Orientación vertical en pantallas pequeñas */
+    position: static; /* Posición estática para que los enlaces no se superpongan con otros elementos */
+    background-color:white;
     width: 100%;
+    max-height: none; /* Altura inicial cuando está oculto */
+    align-items: center;
   }
 
   .navbar-links a {
     padding: 10px;
+    color: gray; /* Cambiar el color del texto a blanco para que sea visible en el fondo oscuro */
+    border-bottom: 1px solid #fff; /* Añadir una línea de separación entre los enlaces */
+    text-align: center; /* Centrar el texto de los enlaces */
   }
 
-  .menu-toggle {
-    display: block; /* Mostrar el botón de menú en pantallas pequeñas */
+  .ucount-logo img {
+    display: none; /* Ocultar el logo en pantallas pequeñas */
+  }
+
+  .navbar-links a:last-child {
+    border-bottom: none;
   }
 }
 

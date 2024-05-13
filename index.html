@@ -10,17 +10,10 @@
     <link rel="icon" href="pwa/icons/icon-96x96.png" type="image/png" />
   </head>
   <body>
-    <!-- <iframe
-      src="landingPage.html"
-      frameborder="0"
-      width="100%"
-      height="500px"
-    ></iframe> -->
     <div class="navbar">
         <div class="ucount-logo">
             <img src="images/maskable.png" alt="Descripción de la imagen">
         </div>
-        <button class="menu-toggle">&#9776;</button> <!-- Botón de menú de hamburguesa -->
         <div class="navbar-links">
             <a href="#">Home</a>
             <a href="views/events.html">Events</a>
@@ -32,6 +25,10 @@
     <div id="EventList">
         <ul id="eventList"></ul>
     </div>
+
+    <button id="subscribeButton">Suscribirse a notificaciones</button>
+    <button id="sendNotificationButton">Enviar notificación</button>
+    <p id="push-message"></p>
 
     <script src="js/index.js" type="module"></script>
 </body>
