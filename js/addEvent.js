@@ -17,7 +17,6 @@ function addEvent(events) {
     people.push(person);
   }
 
-  // Crear evento con personas y agregarlo a la lista de eventos
   const event = new Event(eventName, people, currency);
 
   saveEvent(event);
@@ -32,7 +31,7 @@ async function updateEventList() {
     const eventElement = document.createElement("li");
     const eventLink = document.createElement("a");
     eventLink.textContent = `${event.name} - ${event.people.length} personas`;
-    eventLink.href = `event.html?eventId=${index + 1}`; // Enlace a la vista específica del evento
+    eventLink.href = `event.html?eventId=${index + 1}`;
     eventElement.appendChild(eventLink);
     eventList.appendChild(eventElement);
   });
@@ -44,7 +43,6 @@ function addExpense() {
   const expenseAmount = document.getElementById("expenseAmount").value;
   const expensePayer = document.getElementById("expensePayer").value;
   const expenseParticipants = document.getElementById("expenseParticipants");
-  // tomamos las checkbox que estan seleccionadas
   const selectedParticipants = [
     ...expenseParticipants.querySelectorAll('input[type="checkbox"]:checked'),
   ];
@@ -58,7 +56,6 @@ function addExpense() {
     event.expenses.push(expense);
     updateEvent(event);
   });
-  // Redirigir a la vista del evento
   window.location.href = `event.html?eventId=${eventId}`;
 }
 

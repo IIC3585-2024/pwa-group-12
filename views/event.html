@@ -22,7 +22,13 @@
       </div>
     </div>
 
+    <button id="transactionsBtn" class="button info" href="">Transactions</button>
+
+
+
+
     <div id="eventPage" style="text-align: center; justify-content: center">
+      
       <div
         id="eventDetails"
         style="text-align: center; justify-content: center; align-items: center;"
@@ -167,6 +173,17 @@
                   document.getElementById("expenseEventId");
                 expenseEventId.value = eventId;
 
+
+                document.getElementById("transactionsBtn").addEventListener("click", function() {
+                // Change the page location when the button is clicked
+
+                const url = window.location.href;
+                        // Wait for the events to be retrieved
+
+                        // Get the ID of the event from the URL
+                const eventId = getParameterByName("eventId", url);
+                window.location.href = "eventTransactions.html?eventId=" + eventId;
+              });
                 // Function to calculate total expense
                 function getTotalExpense(expenses) {
                   return expenses.reduce(
@@ -213,6 +230,10 @@
               }
             });
           </script>
+
+<script>
+
+</script>
           <div id="FormularioExpenses" style="text-align: center; align-items: center;">
             <h1>Añadir gasto</h1>
             <form id="addExpenseForm">
@@ -245,6 +266,8 @@
                 addExpenseBtn.addEventListener("click", addExpense);
               });
             </script>
+
+
           </div>
         </div>
       </div>
@@ -281,33 +304,6 @@
       const event = await getEvent(eventId);
 
 
-      // Show event details in the HTML
-      //   const eventDetailsDiv = document.getElementById("eventDetails");
-      //   const eventDetailsHTML = `
-      //   <h2>${event.name}</h2>
-      //   <h3>People (${event.people.length}):</h3>
-      //   <ul>
-      //     ${event.people.map((person) => `<li>${person.name}</li>`).join("")}
-      //   </ul>
-      //   <h3>Total Expenses:</h3>
-      //   <p>${getTotalExpense(event.expenses)} ${event.currency}</p>
-      //   <h3>Average Expense per Person:</h3>
-      //   <p>${getAverageExpense(event.expenses)} ${event.currency}</p>
-      //   <h3>Who owes:</h3>
-      //   <ul>
-      //     ${getOwes(event.expenses)
-      //       .map(
-      //         (person) =>
-      //           `<li>${person.name}: ${person.owes > 0 ? "owes" : "is owed"} ${Math.abs(
-      //             person.owes
-      //           )} ${event.currency}</li>`
-      //       )
-      //       .join("")}
-      //   </ul>
-      // `;
-      // eventDetailsDiv.innerHTML = eventDetailsHTML;
-
-      // Add the people to the select
       const select = document.getElementById("expensePayer");
       console.log("Event people:", event.people);
       event.people.forEach((person) => {
@@ -317,11 +313,9 @@
         select.appendChild(option);
       });
 
-      // Set the event ID in the hidden input
       const expenseEventId = document.getElementById("expenseEventId");
       expenseEventId.value = eventId;
 
-      // Add checkboxes for each person in the checkboxes div
       const checkboxesDiv = document.getElementById("expenseParticipants");
       event.people.forEach((person) => {
         const checkbox = document.createElement("input");
