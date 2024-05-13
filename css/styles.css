@@ -135,7 +135,7 @@ label {
   color: white;
   text-decoration: none;
   padding: 14px 16px;
-  color: gray;
+  color: white;
 }
 
 .navbar-links a:hover {
@@ -162,7 +162,7 @@ label {
 
   .navbar-links a {
     padding: 10px;
-    color: gray; /* Cambiar el color del texto a blanco para que sea visible en el fondo oscuro */
+    color: #fff; /* Cambiar el color del texto a blanco para que sea visible en el fondo oscuro */
     border-bottom: 1px solid #fff; /* Añadir una línea de separación entre los enlaces */
     text-align: center; /* Centrar el texto de los enlaces */
   }
@@ -190,9 +190,9 @@ label {
 a {
   display: inline-block;
   padding: 8px 16px;
-  border: 2px solid #0e66d1; /* Color del borde */
+  border: 2px solid #448260; /* Color del borde */
   border-radius: 5px; /* Bordes redondeados */
-  background-color: #0e66d1; /* Color de fondo */
+  background-color: #448260; /* Color de fondo */
   color: #fff; /* Color del texto */
   text-align: center;
   text-decoration: none;
