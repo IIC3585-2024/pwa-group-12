@@ -1,0 +1,205 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Events</title>
+    <link rel="stylesheet" type="text/css" href="../css/styles.css" />
+    <link rel="manifest" href="../pwa/manifest.json" />
+    <link rel="icon" href="../pwa/icons/icon-96x96.png" type="image/png" />
+  </head>
+  <body>
+    <div class="navbar">
+      <div class="ucount-logo">
+        <img src="../images/maskable.png" alt="Descripción de la imagen" />
+      </div>
+      <button class="menu-toggle">&#9776;</button>
+      <!-- Botón de menú de hamburguesa -->
+      <div class="navbar-links">
+        <a href="../index.html">Home</a>
+        <a href="events.html">Events</a>
+        <a href="addEventPage.html">Create Event</a>
+      </div>
+    </div>
+
+    <div id="eventPage" style="text-align: center; justify-content: center">
+      <div
+        id="eventDetails"
+        style="text-align: center; justify-content: center"
+      >
+        <h1>Event Details</h1>
+
+        <h1>Transactions</h1>
+
+        <div
+          style="display: flex; align-items: center; justify-content: center"
+        >
+          <table
+            id="Transactions"
+            style="
+              border: 1px solid;
+              width: auto;
+              margin: 0 auto;
+              text-align: center;
+              padding: 10px;
+            "
+            ;
+          ></table>
+        </div>
+
+          <script type="module">
+            import { getEvent, startDB } from "../js/IndeedDb.js";
+            // Función para obtener parámetro de la URL
+            function getParameterByName(name, url) {
+              if (!url) url = window.location.href;
+              name = name.replace(/[\[\]]/g, "\\$&");
+              const regex = new RegExp("[?&]" + name + "(=([^&#]*)|&|#|$)");
+              const results = regex.exec(url);
+              if (!results) return null;
+              if (!results[2]) return "";
+              return decodeURIComponent(results[2].replace(/\+/g, " "));
+            }
+
+            // When the DOM content is loaded
+            document.addEventListener("DOMContentLoaded", async function () {
+              try {
+                // Call startDB to initialize the database
+
+                const url = window.location.href;
+                // Wait for the events to be retrieved
+
+                // Get the ID of the event from the URL
+                const eventId = getParameterByName("eventId", url);
+
+                // Get the corresponding event
+                console.log("Event ID:", eventId);
+                const event = await getEvent(eventId);
+                const eventCurrency = "USD";
+
+                console.log("Event:", event);
+
+                // Show event details in the HTML
+                const transactionTable =
+                  document.getElementById("Transactions");
+
+
+                const transactions = event.expenses;
+
+                console.log(transactions);
+
+                for (let i = 0; i < transactions.length; i++) {
+                  const transaction = transactions[i];
+                  const payer = transaction.payer;
+                  const amount = transaction.amount;
+                  const name = transaction.name;
+
+                  const row = document.createElement("tr");
+                  const textCell = document.createElement("td");
+                  textCell.innerHTML = `<strong>${payer}</strong> paid for <strong>${name}</strong>`
+
+                  const amountCell = document.createElement("td");
+                  amountCell.innerHTML = `<strong>${amount}</strong> <strong>${eventCurrency}</strong>`;
+
+                  row.appendChild(textCell);
+                  row.appendChild(amountCell); 
+
+                  transactionTable.appendChild(row);
+                }
+
+                // for (let i = 0; i < event.people.length; i++) {
+                //   console.log(peopleExpenses[i]);
+                //   const personName = peopleExpenses[i].name;
+                //   const balance = peopleExpenses[i].owes;
+
+                //   const row = document.createElement("tr");
+                //   const nameCell = document.createElement("td");
+                //   nameCell.textContent = personName;
+                //   const balanceCell = document.createElement("td");
+                //   balanceCell.textContent = `${balance} ${eventCurrency}`;
+
+                //   if (balance < 0) {
+                //     balanceCell.className = "balance danger";
+                //   } else {
+                //     balanceCell.className = "balance success";
+                //   }
+
+                //   row.appendChild(nameCell);
+                //   row.appendChild(balanceCell);
+
+                //   individualBalanceDiv.appendChild(row);
+                // }
+
+
+                //   // Show event details in the HTML
+                //   const eventDetailsDiv = document.getElementById("eventDetails");
+                //   const eventDetailsHTML = `
+                //   <h2>${event.name}</h2>
+                //   <h3>People (${event.people.length}):</h3>
+                //   <ul>
+                //     ${event.people.map((person) => `<li>${person.name}</li>`).join("")}
+                //   </ul>
+                //   <h3>Total Expenses:</h3>
+                //   <p>${getTotalExpense(event.expenses)}</p>
+                //   <h3>Average Expense per Person:</h3>
+                //   <p>${getAverageExpense(event.expenses)}</p>
+                // `;
+                //   eventDetailsDiv.innerHTML = eventDetailsHTML;
+
+                // Add the people to the select
+                const select = document.getElementById("expensePayer");
+                event.people.forEach((person) => {
+                  const option = document.createElement("option");
+                  option.value = person.name;
+                  option.textContent = person.name;
+                  select.appendChild(option);
+                });
+
+                // Set the event ID in the hidden input
+                const expenseEventId =
+                  document.getElementById("expenseEventId");
+                expenseEventId.value = eventId;
+
+                // Function to calculate total expense
+                function getTotalExpense(expenses) {
+                  return expenses.reduce(
+                    // Sum the amount of each expense with ints
+                    (total, expense) => total + parseInt(expense.amount, 10),
+                    0
+                  );
+                }
+
+                // Function to calculate average expense per person
+                function getAverageExpense(expenses) {
+                  return getTotalExpense(expenses) / event.people.length;
+                }
+
+                // Function to calculate how much each person owes
+                function getOwes(expenses) {
+                  const totalExpense = getTotalExpense(expenses);
+                  const averageExpense = getAverageExpense(expenses);
+                  return event.people.map((person) => {
+                    const personExpense = expenses.reduce(
+                      (total, expense) =>
+                        total +
+                        (expense.payer === person.name
+                          ? parseInt(expense.amount, 10)
+                          : 0),
+                      0
+                    );
+                    return {
+                      name: person.name,
+                      owes: averageExpense - personExpense,
+                    };
+                  });
+                }
+              } catch (error) {
+                console.error("Error while getting events:", error);
+              }
+            });
+          </script>
+        </div>
+      </div>
+    </div>
+  </body>
+  <script src="../js/addEvent.js" type="module"></script>
+</html>

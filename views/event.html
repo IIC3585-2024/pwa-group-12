@@ -22,11 +22,197 @@
       </div>
     </div>
 
-    <div id="eventPage">
+    <div id="eventPage" style="text-align: center; justify-content: center;">
 
-    <div id="eventDetails">
+    <div id="eventDetails"  style="text-align: center; justify-content: center">
     <h1>Event Details</h1>
     
+
+    <h1>Individual Balance</h1>
+
+    <div style="display: flex; align-items: center; justify-content: center">
+      <table
+        id="individualBalance"
+        style="
+          border: 1px solid;
+          width: auto;
+          margin: 0 auto;
+          text-align: center;
+          padding: 10px;
+        "
+        ;
+      ></table>
+    </div>
+
+    <h1>How to settle all debts?</h1>
+
+    <div style="display: flex; align-items: center; justify-content: center">
+      <table
+        id="settleDebts"
+        style="
+          border: 1px solid;
+          width: auto;
+          margin: 0 auto;
+          text-align: center;
+          padding: 10px;
+        "
+        ;
+      ></table>
+
+    <script type="module">
+      import { getEvent, startDB } from "../js/IndeedDb.js";
+      // Función para obtener parámetro de la URL
+      function getParameterByName(name, url) {
+        if (!url) url = window.location.href;
+        name = name.replace(/[\[\]]/g, "\\$&");
+        const regex = new RegExp("[?&]" + name + "(=([^&#]*)|&|#|$)");
+        const results = regex.exec(url);
+        if (!results) return null;
+        if (!results[2]) return "";
+        return decodeURIComponent(results[2].replace(/\+/g, " "));
+      }
+
+      // When the DOM content is loaded
+      document.addEventListener("DOMContentLoaded", async function () {
+        try {
+          // Call startDB to initialize the database
+
+          const url = window.location.href;
+          // Wait for the events to be retrieved
+
+          // Get the ID of the event from the URL
+          const eventId = getParameterByName("eventId", url);
+
+          // Get the corresponding event
+          console.log("Event ID:", eventId);
+          const event = await getEvent(eventId);
+          const eventCurrency = "USD";
+
+          console.log("Event:", event);
+
+          // Show event details in the HTML
+          const individualBalanceDiv =
+            document.getElementById("individualBalance");
+
+          console.log(getOwes(event.expenses));
+
+          const peopleExpenses = getOwes(event.expenses);
+
+          for (let i = 0; i < event.people.length; i++) {
+            console.log(peopleExpenses[i]);
+            const personName = peopleExpenses[i].name;
+            const balance = Math.round(peopleExpenses[i].owes);
+
+            const row = document.createElement("tr");
+            const nameCell = document.createElement("td");
+            nameCell.textContent = personName;
+            const balanceCell = document.createElement("td");
+            balanceCell.textContent = `${balance} ${eventCurrency}`;
+
+            if (balance < 0) {
+              balanceCell.className = "balance danger";
+            } else {
+              balanceCell.className = "balance success";
+            }
+
+            row.appendChild(nameCell);
+            row.appendChild(balanceCell);
+
+            individualBalanceDiv.appendChild(row);
+          }
+
+          const settleDebtsDiv = document.getElementById("settleDebts");
+
+          for (let i = 0; i < event.people.length; i++) {
+            const debtor = event.people[i];
+            const creditor = event.people[i + 1] || event.people[0];
+
+            const debt = 500;
+
+            const row = document.createElement("tr");
+            const textCell = document.createElement("td");
+            textCell.textContent = `${debtor.name} owes ${creditor.name} ${debt} ${eventCurrency}`;
+
+
+            const debtCell = document.createElement("td");
+            debtCell.textContent = debt;
+            debtCell.className = "button sucess";
+
+
+            row.appendChild(textCell);
+            row.appendChild(debtCell);
+
+            settleDebtsDiv.appendChild(row);
+
+          }
+
+
+
+          //   // Show event details in the HTML
+          //   const eventDetailsDiv = document.getElementById("eventDetails");
+          //   const eventDetailsHTML = `
+          //   <h2>${event.name}</h2>
+          //   <h3>People (${event.people.length}):</h3>
+          //   <ul>
+          //     ${event.people.map((person) => `<li>${person.name}</li>`).join("")}
+          //   </ul>
+          //   <h3>Total Expenses:</h3>
+          //   <p>${getTotalExpense(event.expenses)}</p>
+          //   <h3>Average Expense per Person:</h3>
+          //   <p>${getAverageExpense(event.expenses)}</p>
+          // `;
+          //   eventDetailsDiv.innerHTML = eventDetailsHTML;
+
+          // Add the people to the select
+          const select = document.getElementById("expensePayer");
+          event.people.forEach((person) => {
+          const option = document.createElement("option");
+          option.value = person.name;
+          option.textContent = person.name;
+          select.appendChild(option);
+          });
+
+          // Set the event ID in the hidden input
+          const expenseEventId = document.getElementById("expenseEventId");
+          expenseEventId.value = eventId;
+
+
+          // Function to calculate total expense
+          function getTotalExpense(expenses) {
+            return expenses.reduce(
+              // Sum the amount of each expense with ints
+              (total, expense) => total + parseInt(expense.amount, 10),
+              0
+            );
+          }
+
+          // Function to calculate average expense per person
+          function getAverageExpense(expenses) {
+            return getTotalExpense(expenses) / event.people.length;
+          }
+
+          // Function to calculate how much each person owes
+          function getOwes(expenses) {
+            const totalExpense = getTotalExpense(expenses);
+            const averageExpense = getAverageExpense(expenses);
+            return event.people.map((person) => {
+              const personExpense = expenses.reduce(
+                (total, expense) =>
+                  total + (expense.payer === person.name ? parseInt(expense.amount, 10) : 0),
+                0
+              );
+              return {
+                name: person.name,
+                owes: averageExpense - personExpense,
+              };
+            });
+          }
+
+        } catch (error) {
+          console.error("Error while getting events:", error);
+        }
+      });
+    </script>
     </div>
     <div id="FormularioExpenses">
       <h1>Añadir gasto</h1>
@@ -61,6 +247,7 @@
     </div>
 
   </div>
+    </div>
   </body>
   <script src="../js/addEvent.js" type="module"></script>
 </html>
