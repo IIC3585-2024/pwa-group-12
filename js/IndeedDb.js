@@ -124,6 +124,7 @@ async function getEvents() {
       reject(requestHere.error);
     };
   });
+}
 
 async function subscribeUserToPush() {
   const registration = await navigator.serviceWorker.ready;
