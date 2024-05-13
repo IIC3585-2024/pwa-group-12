@@ -9,6 +9,8 @@ function addEvent(events) {
     "participantsElements"
   );
 
+  const currency = document.getElementById("eventCurrency").value;
+
   for (let i = 0; i < partcipantParentElement.children.length - 1; i++) {
     const personName = partcipantParentElement.children[i].children[0].value;
     console.log("Persona: ", personName);
@@ -17,7 +19,7 @@ function addEvent(events) {
   }
 
   // Crear evento con personas y agregarlo a la lista de eventos
-  const event = new Event(eventName, people);
+  const event = new Event(eventName, people, currency);
   console.log("Evento agregado");
   console.log("participantes: ", event.people);
   console.log("Eventos: ", events);

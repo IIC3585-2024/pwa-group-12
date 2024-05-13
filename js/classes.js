@@ -6,10 +6,11 @@ class Person {
   
   // Definir un objeto Evento
   class Event {
-    constructor(name, people) {
+    constructor(name, people, currency) {
         this.name = name;
         this.people = people;
         this.expenses = [];
+        this.currency = currency;
     }
   }
 

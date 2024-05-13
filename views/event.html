@@ -104,9 +104,9 @@
         ${event.people.map((person) => `<li>${person.name}</li>`).join("")}
       </ul>
       <h3>Total Expenses:</h3>
-      <p>${getTotalExpense(event.expenses)}</p>
+      <p>${getTotalExpense(event.expenses)} ${event.currency}</p>
       <h3>Average Expense per Person:</h3>
-      <p>${getAverageExpense(event.expenses)}</p>
+      <p>${getAverageExpense(event.expenses)} ${event.currency}</p>
       <h3>Who owes:</h3>
       <ul>
         ${getOwes(event.expenses)
@@ -114,7 +114,7 @@
             (person) =>
               `<li>${person.name}: ${person.owes > 0 ? "owes" : "is owed"} ${Math.abs(
                 person.owes
-              )}</li>`
+              )} ${event.currency}</li>`
           )
           .join("")}
       </ul>
@@ -184,6 +184,8 @@
           }
           
         });
+
+
         return Object.keys(owes).map((person) => ({ name: person, owes: owes[person] }));
       }
 
