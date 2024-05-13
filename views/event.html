@@ -52,7 +52,7 @@
             ;
           ></table>
         </div>
-
+<!-- 
         <h1>How to settle all debts?</h1>
 
         <div
@@ -69,7 +69,7 @@
             "
             ;
           ></table>
-        </div>
+        </div> -->
           <script type="module">
             import { getEvent, startDB } from "../js/IndeedDb.js";
             // Función para obtener parámetro de la URL
@@ -128,27 +128,27 @@
                   individualBalanceDiv.appendChild(row);
                 }
 
-                const settleDebtsDiv = document.getElementById("settleDebts");
+                // const settleDebtsDiv = document.getElementById("settleDebts");
 
-                for (let i = 0; i < event.people.length; i++) {
-                  const debtor = event.people[i];
-                  const creditor = event.people[i + 1] || event.people[0];
+                // for (let i = 0; i < event.people.length; i++) {
+                //   const debtor = event.people[i];
+                //   const creditor = event.people[i + 1] || event.people[0];
 
-                  const debt = 500;
+                //   const debt = 500;
 
-                  const row = document.createElement("tr");
-                  const textCell = document.createElement("td");
-                  textCell.textContent = `${debtor.name} owes ${creditor.name} ${debt} ${eventCurrency}`;
+                //   const row = document.createElement("tr");
+                //   const textCell = document.createElement("td");
+                //   textCell.textContent = `${debtor.name} owes ${creditor.name} ${debt} ${eventCurrency}`;
 
-                  const debtCell = document.createElement("td");
-                  debtCell.textContent = debt;
-                  debtCell.className = "button sucess";
+                //   const debtCell = document.createElement("td");
+                //   debtCell.textContent = debt;
+                //   debtCell.className = "button sucess";
 
-                  row.appendChild(textCell);
-                  row.appendChild(debtCell);
+                //   row.appendChild(textCell);
+                //   row.appendChild(debtCell);
 
-                  settleDebtsDiv.appendChild(row);
-                }
+                //   settleDebtsDiv.appendChild(row);
+                // }
 
                 //   // Show event details in the HTML
                 //   const eventDetailsDiv = document.getElementById("eventDetails");
@@ -235,22 +235,22 @@
 
 </script>
           <div id="FormularioExpenses" style="text-align: center; align-items: center;">
-            <h1>Añadir gasto</h1>
+            <h1>Add expense</h1>
             <form id="addExpenseForm">
               <input type="hidden" id="expenseEventId" name="expenseEventId" />
-              <label for="name">Nombre:</label>
+              <label for="name">Description:</label>
               <input type="text" id="expenseName" name="name" required />
               <br />
-              <label for="amount">Cantidad:</label>
+              <label for="amount">Amount:</label>
               <input type="number" id="expenseAmount" name="amount" required />
               <br />
-              <label for="payer">Pagador:</label>
+              <label for="payer">Payer:</label>
               <select id="expensePayer" name="payer" required>
-                <option value="" disabled selected>Seleccionar...</option>
+                <option value="" disabled selected>Select...</option>
               </select>
 
               <div style="text-align: center; align-items: center">
-                <h3>Deudores:</h3>
+                <h3>Debtors:</h3>
 
                 <div class="row" id="expenseParticipants"></div>
               </div>
