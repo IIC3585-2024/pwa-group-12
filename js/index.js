@@ -6,5 +6,3 @@ await registerSW();
 
 startDB();
 await updateEventList();
-
-document.getElementById("addEventBtn").addEventListener("click", addEvent);
