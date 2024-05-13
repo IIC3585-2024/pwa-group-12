@@ -49,5 +49,17 @@
         });
       });
     </script>
+    <button id="somebutton">Enviar notificación de prueba</button>
+    <script>
+        const button = document.getElementById('somebutton');
+
+        button.addEventListener('click', () => {
+            Notification.requestPermission().then((result) => {
+                if (result === 'granted') {
+                    new Notification('Podemos recibir notificaciones!');
+                }
+            });
+        });
+    </script>
   </body>
 </html>
