@@ -95,12 +95,17 @@
 
                   const row = document.createElement("tr");
                   const textCell = document.createElement("td");
-                  textCell.innerHTML = `<strong>${payer}</strong> paid for <strong>${name}</strong>`
+                  textCell.innerHTML = `<strong>${payer}</strong> paid for <strong>${name}</strong>`;
+
+                  const participantsCell = document.createElement("td");
+                  participantsCell.innerHTML = `This wad paid for <strong>${transaction.participants.join(", ")}</strong>`;
+
 
                   const amountCell = document.createElement("td");
                   amountCell.innerHTML = `<strong>${amount}</strong> <strong>${eventCurrency}</strong>`;
 
                   row.appendChild(textCell);
+                  row.appendChild(participantsCell);
                   row.appendChild(amountCell); 
 
                   transactionTable.appendChild(row);
