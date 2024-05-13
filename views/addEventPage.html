@@ -21,27 +21,33 @@
           <a href="addEventPage.html">Create Event</a>
       </div>
     </div> 
-      <h1>New Event</h1>
-      <div id="eventform">
-      <form id="addEventForm">
-        <label for="eventName">Event Name:</label>
-        <input type="text" id="eventName" name="eventName" required />
-        <label for="eventCurrency">Currency:</label>
-        <select id="eventCurrency" name="eventCurrency">
-          <option value="USD">USD</option>
-          <option value="EUR">EUR</option>
-          <option value="JPY">JPY</option>
-          <option value="CLP">CLP</option>
-        </select>
-        <label for="eventParticipants">Participants</label>
-        <div id="participantsElements">
-        <div class="row" id="participant1">
-          <input type="text" id="participantInput1" name="participant1" />
-            <button type="button" class="button danger" onclick="deleteParticipant('participant1')">
-                Delete
+    <div style="text-align: center;">
+      <div style="display: inline-block; text-align: left;">
+        <h1>New Event</h1>
+        <div id="eventform">
+          <form id="addEventForm">
+            <label for="eventName">Event Name:</label>
+            <input type="text" id="eventName" name="eventName" required />
+            <label for="eventCurrency">Currency:</label>
+            <select id="eventCurrency" name="eventCurrency">
+              <option value="USD">USD</option>
+              <option value="EUR">EUR</option>
+              <option value="JPY">JPY</option>
+              <option value="CLP">CLP</option>
+            </select>
+            <label for="eventParticipants">Participants:</label>
+            <div id="participantsElements">
+              <div class="row" id="participant1">
+                <input type="text" id="participantInput1" name="participant1" />
+                <button type="button" class="button danger" onclick="deleteParticipant('participant1')">
+                  Delete
+                </button>
+              </div>
+              <button type="button" id="addParticipantBtn" class="button info">Add Participant</button>
+            </div>
+          </form>
         </div>
-        <button type="button" id="addParticipantBtn" class="button info">Add Participant</button>
-        </div>
+    
         <script>
           // Counter for tracking participant number
           let participantCount = 1;
@@ -92,6 +98,9 @@
           document
             .getElementById("addParticipantBtn")
             .addEventListener("click", addInput);
+
+
+          
         </script>
 
         <!-- <script>
@@ -116,6 +125,8 @@
         <!-- </div>
     </div> -->
       <button id="addEventBtn" class="button success">Add Event</button>
+      </div>
+    </div>
     </div>
 
     <h1>Event List</h1>
