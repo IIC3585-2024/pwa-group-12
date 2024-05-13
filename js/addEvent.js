@@ -1,5 +1,5 @@
 import { Person, Event } from "./classes.js";
-import { saveEvent, getEvents, getEvent } from "./IndeedDB.js";
+import { saveEvent, getEvents, getEvent, updateEvent } from "./IndeedDB.js";
 
 function addEvent(events) {
   const eventName = document.getElementById("eventName").value;
@@ -40,4 +40,26 @@ async function updateEventList() {
   });
 }
 
-export { addEvent, updateEventList };
+function addExpense() {
+  console.log("Agregando gasto");
+  const eventId = document.getElementById("expenseEventId").value;
+  const expenseName = document.getElementById("expenseName").value;
+  const expenseAmount = document.getElementById("expenseAmount").value;
+  const expensePayer = document.getElementById("expensePayer").value;
+  const expense = {
+    payer: expensePayer,
+    name: expenseName,
+    amount: expenseAmount,
+  };
+  console.log("Gasto: ", expense);
+  console.log("Evento: ", eventId);
+  getEvent(eventId).then((event) => {
+    event.expenses.push(expense);
+    console.log("Evento actualizado: ", event);
+    updateEvent(event);
+  });
+  // Redirigir a la vista del evento
+  window.location.href = `event.html?eventId=${eventId}`;
+}
+
+export { addEvent, updateEventList, addExpense };

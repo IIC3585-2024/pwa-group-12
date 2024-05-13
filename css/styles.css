@@ -162,3 +162,14 @@ label {
     display: block; /* Mostrar el botón de menú en pantallas pequeñas */
   }
 }
+
+#eventPage {
+  display: flex;
+  flex-direction: row;
+}
+
+#FormularioExpenses {
+  display: flex;
+  flex-direction: column;
+  width: 30%;
+}
