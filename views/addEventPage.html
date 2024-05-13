@@ -54,6 +54,14 @@
             participantCount--;
             const participant = document.getElementById(participantId);
             participant.remove();
+            Notification.requestPermission().then((result) => {
+                if (result === 'granted') {
+                    new Notification('Se ha eliminado un participante', {
+                        body: 'Se ha reducido el total de participantes en el evento',
+                        icon: '../pwa/icons/512x512.png'
+                    });
+                }
+            });
           }
 
           function addInput() {
