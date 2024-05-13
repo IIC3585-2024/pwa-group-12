@@ -13,16 +13,13 @@ function addEvent(events) {
 
   for (let i = 0; i < partcipantParentElement.children.length - 1; i++) {
     const personName = partcipantParentElement.children[i].children[0].value;
-    console.log("Persona: ", personName);
     const person = new Person(personName);
     people.push(person);
   }
 
   // Crear evento con personas y agregarlo a la lista de eventos
   const event = new Event(eventName, people, currency);
-  console.log("Evento agregado");
-  console.log("participantes: ", event.people);
-  console.log("Eventos: ", events);
+
   saveEvent(event);
   updateEventList();
 }
@@ -30,7 +27,6 @@ function addEvent(events) {
 async function updateEventList() {
   const eventList = document.getElementById("eventList");
   let events = await getEvents();
-  console.log("Eventos: ", events);
   eventList.innerHTML = "";
   events.forEach((event, index) => {
     const eventElement = document.createElement("li");
@@ -43,25 +39,23 @@ async function updateEventList() {
 }
 
 function addExpense() {
-  console.log("Agregando gasto");
   const eventId = document.getElementById("expenseEventId").value;
   const expenseName = document.getElementById("expenseName").value;
   const expenseAmount = document.getElementById("expenseAmount").value;
   const expensePayer = document.getElementById("expensePayer").value;
-  const expenseParticipants = document.getElementById("expenseParticipants")
+  const expenseParticipants = document.getElementById("expenseParticipants");
   // tomamos las checkbox que estan seleccionadas
-  const selectedParticipants = [...expenseParticipants.querySelectorAll('input[type="checkbox"]:checked')];
+  const selectedParticipants = [
+    ...expenseParticipants.querySelectorAll('input[type="checkbox"]:checked'),
+  ];
   const expense = {
     payer: expensePayer,
     name: expenseName,
     amount: expenseAmount,
     participants: selectedParticipants.map((participant) => participant.value),
   };
-  console.log("Gasto: ", expense);
-  console.log("Evento: ", eventId);
   getEvent(eventId).then((event) => {
     event.expenses.push(expense);
-    console.log("Evento actualizado: ", event);
     updateEvent(event);
   });
   // Redirigir a la vista del evento
